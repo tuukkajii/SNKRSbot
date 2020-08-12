@@ -2,6 +2,7 @@ import requests
 import json
 from bs4 import BeautifulSoup
 import randomheaders
+import threading
 
 # URL and stuff
 URL = 'https://www.nike.com/de/launch?s=upcoming'
@@ -17,6 +18,11 @@ def monitor():
 
     for hrefs in res.find_all('figure', class_='pb2-sm'):
         a = hrefs.find('a')
-        print('https://www.nike.com/' + a.get('href'))
+        h6 = hrefs.find('h6')
+        h3 = hrefs.find('h3')
+
+        #print(h3)
+
+        print(h3.text + '- ' + h6.text, ': ', 'https://www.nike.com' + a.get('href'))
 
 monitor()
